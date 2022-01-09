@@ -1,10 +1,15 @@
 package commons;
 
+import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
@@ -103,5 +108,65 @@ public class BasePage {
 		}
 		
 	}
+	
+	/*Web element*/
+	public By getByXpath(String xpathExpression) {
+		return By.xpath(xpathExpression);
+	}
+	
+	public WebElement getWebElement(WebDriver driver, String xpathExpression) {
+		return driver.findElement(getByXpath(xpathExpression));
+	}
+	
+	public List<WebElement> getWebElements(WebDriver driver, String xpathExpression) {
+		return driver.findElements(getByXpath(xpathExpression));
+	}
+	
+	public void clickToElement(WebDriver driver, String xpathExpression) {
+		getWebElement(driver, xpathExpression).click();
+	}
+	
+	public void senkeyToElement(WebDriver driver,  String xpathExpression, String value) {
+		getWebElement(driver, xpathExpression).clear();
+		getWebElement(driver, xpathExpression).sendKeys(value);
+	}
+	
+	public void selectItemInDefaultDropdown(WebDriver driver, String xpathExpression, String itemText) {
+		new Select(getWebElement(driver, xpathExpression)).selectByVisibleText(itemText);
+	}
+	
+	public String getSelectTextInDefaultDropdown(WebDriver driver, String xpathExpression) {
+		return new Select(getWebElement(driver, xpathExpression)).getFirstSelectedOption().getText();
+	}
+	
+	public boolean isDefaultDropdownMutiple(WebDriver driver, String xpathExpression) {
+		 return new Select(getWebElement(driver, xpathExpression)).isMultiple();
+	}
+	
+	public void selectItemInCustomDropdown(WebDriver driver, String parentLocator, String childItemLocator, String expectedItem) {
+		getWebElement(driver, parentLocator).click();
+		SleepInSecond(1);
+
+		WebDriverWait explicitWait = new WebDriverWait(driver, 30);
+		List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByXpath(childItemLocator)));
+
+		for (WebElement item : allItems) {
+			if (item.getText().trim().equals(expectedItem)) {
+				JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
+				SleepInSecond(1);
+
+				item.click();
+				SleepInSecond(1);
+				break;
+			}
+		}
+	}
+	
+	public String getElementText(WebDriver driver, String xpathExpression) {
+		return getWebElement(driver, xpathExpression).getText();
+	}
+	
+	
 
 }
