@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -167,6 +168,31 @@ public class BasePage {
 		return getWebElement(driver, xpathExpression).getText();
 	}
 	
+	public String getElementAtribute(WebDriver driver, String xpathExpression, String attributeName) {
+		return getWebElement(driver, xpathExpression).getAttribute(attributeName);
+	}
 	
+	public String getElementCssValue(WebDriver driver, String xpathExpression, String propertyName) {
+	    return getWebElement(driver, xpathExpression).getCssValue(propertyName);
+	}
+	
+	public String getHexaColorByRgbaColor(String rgbaColor) {
+		return Color.fromString(rgbaColor).asHex();
+	}
 
+	public int getElementNumber(WebDriver driver, String xpathExpression) {
+		return getWebElements(driver, xpathExpression).size();
+	}
+	
+	public void checkToRadioOrCheckbox(WebDriver driver, String xpathExpression) {
+		if (!getWebElement(driver, xpathExpression).isSelected()) {
+			getWebElement(driver, xpathExpression).click();
+		}
+	}
+	
+	public void unCheckToCheckbox(WebDriver driver, String xpathExpression) {
+		if(getWebElement(driver, xpathExpression).isSelected()) {
+			getWebElement(driver, xpathExpression).click();
+		}
+	}
 }
