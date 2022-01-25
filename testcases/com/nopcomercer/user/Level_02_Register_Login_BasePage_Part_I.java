@@ -29,7 +29,7 @@ public class Level_02_Register_Login_BasePage_Part_I {
 		driver = new FirefoxDriver();
 
 		basePage = new BasePage();
-		emailAddress = "ntd" + randomEmail() + "@email.vn";
+		emailAddress = "ntd" + generrateFakeNumber() + "@email.vn";
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get("https://demo.nopcommerce.com/");
 	}
@@ -151,7 +151,7 @@ public class Level_02_Register_Login_BasePage_Part_I {
 		driver.quit();
 	}
 
-	public int randomEmail() {
+	public int generrateFakeNumber() {
 		Random rand = new Random();
 		return rand.nextInt(1000);
 
