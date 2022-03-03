@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Nopcommerce]">
+  <test thread-count="5" name="Run on Firefox(failed)">
+    <classes>
+      <class name="com.nopcomercer.user.Level_03_Register_Login_Page_Object">
+        <methods>
+          <include name="TC_05_Register_Password_Less"/>
+          <include name="afterClass"/>
+          <include name="beforeClass"/>
+        </methods>
+      </class> <!-- com.nopcomercer.user.Level_03_Register_Login_Page_Object -->
+    </classes>
+  </test> <!-- Run on Firefox(failed) -->
+</suite> <!-- Failed suite [Nopcommerce] -->

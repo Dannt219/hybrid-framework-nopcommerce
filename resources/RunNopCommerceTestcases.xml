@@ -3,7 +3,7 @@
 
   <test name="Run on Firefox">
     <classes>
-      <class name="com.nopcomercer.user.Level_02_Register_Login_BasePage_Part_I"/>
+      <class name="com.nopcomercer.user.Level_03_Register_Login_Page_Object"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
