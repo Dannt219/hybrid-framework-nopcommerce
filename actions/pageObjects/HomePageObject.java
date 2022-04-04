@@ -18,4 +18,9 @@ public class HomePageObject extends BasePage {
 		clickToElement(driver, HomePageUI.REGISTER_LINK);
 	}
 
+	public void clickToLoginLink() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
