@@ -15,11 +15,28 @@ public class LoginPageObject extends BasePage {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public String getErrorMessageAtEmailTExtbox() {
+	
+	public String getErrorMessageAtEmailTextbox() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void inputToEmailTextBox(String invalidEmail) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getErrorMessageUnsuccessfull() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void inputToPasswordTextbox(String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 	
 

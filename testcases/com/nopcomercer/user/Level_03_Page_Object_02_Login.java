@@ -32,8 +32,10 @@ public class Level_03_Page_Object_02_Login  {
 
 		firstName = "Aidan";
 		lastName = "Nguyen";
-		validEmail = "ntd" + generrateFakeNumber() + "@email.vn";
+		existingEmail = "ntd" + generrateFakeNumber() + "@email.vn";
 		password = "123456";
+		invalidEmail = "dannt@dannt.com@.vn";
+		notFoundEmail = "ntd" + generrateFakeNumber() + "@email.com";
 		
 		System.out.print("Pre-Condition - Step 01: Click to Register link");
 		homePage.clickToRegisterLink();
@@ -42,7 +44,7 @@ public class Level_03_Page_Object_02_Login  {
 		System.out.print("Pre-Condition - Step 02: Input requiered fields");
 		registerPage.inputToFirstnameTextbox(firstName);
 		registerPage.inputToLastnameTextbox(lastName);
-		registerPage.inputToEmailTextbox(validEmail);
+		registerPage.inputToEmailTextbox(existingEmail);
 		registerPage.inputToPasswordTextbox(password);
 		registerPage.inputToConfirmPasswordTextbox(password);
 
@@ -71,7 +73,7 @@ public class Level_03_Page_Object_02_Login  {
 		
 		loginPage.clickToLoginButton();
 		
-		Assert.assertEquals(loginPage.getErrorMessageAtEmailTExtbox(), "");
+		Assert.assertEquals(loginPage.getErrorMessageAtEmailTextbox(), "Please enter your email");
 		
 	}
 
@@ -81,28 +83,55 @@ public class Level_03_Page_Object_02_Login  {
 		
 		// Tu trang Home Click Login khoi tao Login
 		loginPage = new LoginPageObject(driver);
+		loginPage.inputToEmailTextBox(invalidEmail);
+		loginPage.clickToLoginButton();
 		
+		Assert.assertEquals(loginPage.getErrorMessageAtEmailTextbox(), "Wrong email");
 		
-
 	}
 
 	@Test
 	public void Login_03_Email_Not_Found() {
+		homePage.clickToLoginLink();
+		
+		// Tu trang Home Click Login khoi tao Login
+		loginPage = new LoginPageObject(driver);
+		loginPage.inputToEmailTextBox(notFoundEmail);
+		loginPage.clickToLoginButton();
+		
+		Assert.assertEquals(loginPage.getErrorMessageUnsuccessfull(), "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
 		
 	}
 
 	@Test
 	public void Login_04_Existing_Email_Empty_Password() {
+		loginPage = new LoginPageObject(driver);
+		loginPage.inputToEmailTextBox(existingEmail);
+		loginPage.inputToPasswordTextbox("");
+		
+		loginPage.clickToLoginButton();
+		Assert.assertEquals(loginPage.getErrorMessageUnsuccessfull(), "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
 
 	}
 
 	@Test
 	public void Login_05_Existing_Email_Incorrect_Password() {
+		loginPage = new LoginPageObject(driver);
+		loginPage.inputToEmailTextBox(existingEmail);
+		loginPage.inputToPasswordTextbox("9865345");
+	
+		loginPage.clickToLoginButton();
 		
 	}
-
+	
 	@Test
 	public void Login_06_Valid_Email_Password() {
+		loginPage = new LoginPageObject(driver);
+		loginPage.inputToEmailTextBox(existingEmail);
+		loginPage.inputToPasswordTextbox(password);
+		
+		loginPage.clickToLoginButton();
+		
 		
 	}
 
@@ -117,7 +146,7 @@ public class Level_03_Page_Object_02_Login  {
 
 	}
 	private WebDriver driver;
-	private String firstName,lastName,validEmail,password;
+	private String firstName,lastName,invalidEmail, notFoundEmail,existingEmail,password;
 	private String projectPath = System.getProperty("user.dir");
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
