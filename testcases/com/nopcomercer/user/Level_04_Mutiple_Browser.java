@@ -3,26 +3,43 @@ package com.nopcomercer.user;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.management.RuntimeErrorException;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pageObjects.HomePageObject;
 import pageObjects.RegisterPageObject;
 
-public class Level_03_Page_Objec_01_Register  {
+public class Level_04_Mutiple_Browser  {
 		Select select;
 		WebDriverWait explicitWait;
-
+	@Parameters("browser")
 	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-		driver = new FirefoxDriver();
+	public void beforeClass(String browserName) {
+		
+		if(browserName.equals("firefox")) {
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			driver = new FirefoxDriver();
+		} else if (browserName.equals("chrome")) {
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			driver = new ChromeDriver();
+		}else if(browserName.equals("edge")) {
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+			driver = new FirefoxDriver();
+		} else {
+			throw new RuntimeException("Browser name invalid");
+		}
+		
+		
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		homePage = new HomePageObject(driver);
 		driver.get("https://demo.nopcommerce.com/");

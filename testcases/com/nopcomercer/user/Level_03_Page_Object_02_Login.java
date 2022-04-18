@@ -17,8 +17,13 @@ import pageObjects.LoginPageObject;
 import pageObjects.RegisterPageObject;
 
 public class Level_03_Page_Object_02_Login  {
-
-
+	
+	private WebDriver driver;
+	private String firstName,lastName,invalidEmail, notFoundEmail,existingEmail,password;
+	private String projectPath = System.getProperty("user.dir");
+	private HomePageObject homePage;
+	private RegisterPageObject registerPage;
+	private LoginPageObject loginPage;
 	Select select;
 	WebDriverWait explicitWait;
 
@@ -110,7 +115,7 @@ public class Level_03_Page_Object_02_Login  {
 		loginPage.inputToPasswordTextbox("");
 		
 		loginPage.clickToLoginButton();
-		Assert.assertEquals(loginPage.getErrorMessageUnsuccessfull(), "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
+		Assert.assertEquals(loginPage.getErrorMessageUnsuccessfull(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrec");
 
 	}
 
@@ -121,7 +126,8 @@ public class Level_03_Page_Object_02_Login  {
 		loginPage.inputToPasswordTextbox("9865345");
 	
 		loginPage.clickToLoginButton();
-		
+		Assert.assertEquals(loginPage.getErrorMessageUnsuccessfull(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrec");
+
 	}
 	
 	@Test
@@ -131,6 +137,10 @@ public class Level_03_Page_Object_02_Login  {
 		loginPage.inputToPasswordTextbox(password);
 		
 		loginPage.clickToLoginButton();
+		//Login thanh con se quay ve Homepage
+		homePage = new HomePageObject(driver);
+		
+		Assert.assertTrue(homePage.isMyAccountLinkDisplayed());
 		
 		
 	}
@@ -145,11 +155,6 @@ public class Level_03_Page_Object_02_Login  {
 		return rand.nextInt(1000);
 
 	}
-	private WebDriver driver;
-	private String firstName,lastName,invalidEmail, notFoundEmail,existingEmail,password;
-	private String projectPath = System.getProperty("user.dir");
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
-	private LoginPageObject loginPage;
+
 
 }

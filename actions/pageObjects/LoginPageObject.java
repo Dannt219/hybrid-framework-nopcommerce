@@ -3,6 +3,7 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import pageUIs.LoginPageUI;
 
 public class LoginPageObject extends BasePage {
 	private WebDriver driver;
@@ -12,27 +13,28 @@ public class LoginPageObject extends BasePage {
 	}
 
 	public void clickToLoginButton() {
-		// TODO Auto-generated method stub
-		
+		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);		
+		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
 	}
 	
 	public String getErrorMessageAtEmailTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, LoginPageUI.EMAIL_ERROR_MESSAGE);
+		return getElementText(driver, LoginPageUI.EMAIL_ERROR_MESSAGE);
 	}
 
 	public void inputToEmailTextBox(String invalidEmail) {
-		// TODO Auto-generated method stub
-		
+		waitForElementVisible(driver,LoginPageUI.EMAIL_TEXTBOX);
+		senkeyToElement(driver, LoginPageUI.EMAIL_TEXTBOX, invalidEmail);
 	}
 
 	public String getErrorMessageUnsuccessfull() {
-		// TODO Auto-generated method stub
-		return null;
+		waitForElementVisible(driver, LoginPageUI.UNSUCCESSFUL_ERROR_MESSAGE);
+		return getElementText(driver, LoginPageUI.UNSUCCESSFUL_ERROR_MESSAGE);
 	}
 
 	public void inputToPasswordTextbox(String password) {
-		// TODO Auto-generated method stub
+		waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
+		senkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 		
 	}
 

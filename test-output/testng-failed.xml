@@ -2,14 +2,54 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Nopcommerce]">
   <test thread-count="5" name="Run on Firefox(failed)">
+    <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="com.nopcomercer.user.Level_03_Register_Login_Page_Object">
+      <class name="com.nopcomercer.user.Level_03_Page_Object_02_Login">
         <methods>
-          <include name="TC_05_Register_Password_Less"/>
+          <include name="Login_05_Existing_Email_Incorrect_Password"/>
           <include name="afterClass"/>
+          <include name="Login_02_Invalid_Email"/>
+          <include name="Login_03_Email_Not_Found"/>
           <include name="beforeClass"/>
+          <include name="Login_06_Valid_Email_Password"/>
+          <include name="Login_01_Empty_Data"/>
+          <include name="Login_04_Existing_Email_Empty_Password"/>
         </methods>
-      </class> <!-- com.nopcomercer.user.Level_03_Register_Login_Page_Object -->
+      </class> <!-- com.nopcomercer.user.Level_03_Page_Object_02_Login -->
     </classes>
   </test> <!-- Run on Firefox(failed) -->
+  <test thread-count="5" name="Run on Chrome(failed)">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.nopcomercer.user.Level_03_Page_Object_02_Login">
+        <methods>
+          <include name="Login_05_Existing_Email_Incorrect_Password"/>
+          <include name="afterClass"/>
+          <include name="Login_02_Invalid_Email"/>
+          <include name="Login_03_Email_Not_Found"/>
+          <include name="beforeClass"/>
+          <include name="Login_06_Valid_Email_Password"/>
+          <include name="Login_01_Empty_Data"/>
+          <include name="Login_04_Existing_Email_Empty_Password"/>
+        </methods>
+      </class> <!-- com.nopcomercer.user.Level_03_Page_Object_02_Login -->
+    </classes>
+  </test> <!-- Run on Chrome(failed) -->
+  <test thread-count="5" name="Run on Edge(failed)">
+    <parameter name="browser" value="edge"/>
+    <classes>
+      <class name="com.nopcomercer.user.Level_03_Page_Object_02_Login">
+        <methods>
+          <include name="Login_05_Existing_Email_Incorrect_Password"/>
+          <include name="afterClass"/>
+          <include name="Login_02_Invalid_Email"/>
+          <include name="Login_03_Email_Not_Found"/>
+          <include name="beforeClass"/>
+          <include name="Login_06_Valid_Email_Password"/>
+          <include name="Login_01_Empty_Data"/>
+          <include name="Login_04_Existing_Email_Empty_Password"/>
+        </methods>
+      </class> <!-- com.nopcomercer.user.Level_03_Page_Object_02_Login -->
+    </classes>
+  </test> <!-- Run on Edge(failed) -->
 </suite> <!-- Failed suite [Nopcommerce] -->
