@@ -16,34 +16,21 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import commons.BaseTest;
 import pageObjects.HomePageObject;
 import pageObjects.RegisterPageObject;
 
-public class Level_04_Mutiple_Browser  {
+public class Level_04_Mutiple_Browser extends BaseTest  {
 		Select select;
 		WebDriverWait explicitWait;
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browserName) {
 		
-		if(browserName.equals("firefox")) {
-			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-			driver = new FirefoxDriver();
-		} else if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
-			driver = new ChromeDriver();
-		}else if(browserName.equals("edge")) {
-			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
-			driver = new FirefoxDriver();
-		} else {
-			throw new RuntimeException("Browser name invalid");
-		}
-		
-		
+		getBrowserDriver(browserName);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		homePage = new HomePageObject(driver);
 		driver.get("https://demo.nopcommerce.com/");
-
 		firstName = "Aidan";
 		lastName = "Nguyen";
 		emailAddress = "ntd" + generrateFakeNumber() + "@email.vn";
@@ -53,18 +40,14 @@ public class Level_04_Mutiple_Browser  {
 
 	@Test
 	public void Register_01_Empty_Data() {
-		//openUrl(driver, "https://demo.nopcommerce.com/");
-		
+
 		System.out.print("Register_01 - Step 01: Click to Register link");
 		homePage.clickToRegisterLink();
 		
-		//click vaof register link khoi tao register
 		registerPage = new RegisterPageObject(driver);
-
 		System.out.print("Register_01 - Step 02: Click to Register button");
 		registerPage.clickToRegisterButton();
 
-		
 		System.out.print("Register_01 - Step 03: Verify error message displayed");
 		Assert.assertEquals(registerPage.getErrorMessageAtFirstnameTextbox(),"First name is required.");
 		Assert.assertEquals(registerPage.getErrorMessageAtLastnameTextbox(),"Last name is required.");
@@ -79,8 +62,6 @@ public class Level_04_Mutiple_Browser  {
 	
 		System.out.print("Register_02- Step 01: Click to Register link");
 		homePage.clickToRegisterLink();
-		
-		//click vaof register link khoi tao register
 		registerPage = new RegisterPageObject(driver);
 
 		System.out.print("Register_02 - Step 02: Input requiered fields");
@@ -208,7 +189,6 @@ public class Level_04_Mutiple_Browser  {
 	}
 	private WebDriver driver;
 	private String firstName,lastName,emailAddress,password;
-	private String projectPath = System.getProperty("user.dir");
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 
